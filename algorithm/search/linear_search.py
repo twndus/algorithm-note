@@ -13,10 +13,10 @@ if __name__ == '__main__':
     array_size = int(input("배열의 크기를 입력하세요: "))
 
     for i in range(array_size):
-        array_elem = input(f"[{i}]번째 요소를 입력하세요: ")
+        array_elem = int(input(f"[{i}]번째 요소를 입력하세요: "))
         array.append(array_elem)
 
-    elem = input("검색할 요소를 입력하세요: ")
+    elem = int(input("검색할 요소를 입력하세요: "))
 
     index = linear_search(array, elem)
     
