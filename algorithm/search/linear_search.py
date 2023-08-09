@@ -1,11 +1,10 @@
 # linear search
 
 def linear_search(array, elem):
-    index = -1
     for i, e in enumerate(array):
         if elem == e:
-            index = i
-    return index
+            return i
+    return -1
 
 if __name__ == '__main__':
     array = []
