@@ -6,20 +6,17 @@ binary search
 '''
 
 def binary_search(array, elem):
-    # sort
-    array.sort()
+    pl = 0
+    pr = len(array)-1
 
-    lower_bound = 0
-    upper_bound = len(array)-1
-
-    while lower_bound < upper_bound:
-        index = (lower_bound+upper_bound)//2
-        if array[index] == elem:
-            return index 
-        elif array[index] > elem:
-            upper_bound = index
-        elif array[index] < elem:
-            lower_bound = index
+    while pl <= pr:
+        pc = (pl+pr)//2
+        if array[pc] == elem:
+            return pc
+        elif array[pc] > elem:
+            pr = pc-1
+        elif array[pc] < elem:
+            pl = pc+1
     return -1
 
 
@@ -35,6 +32,8 @@ if __name__ == '__main__':
 
     elem = int(input("검색할 요소를 입력하세요: "))
 
+    # sort
+    array.sort()
     index = binary_search(array, elem)
     
     if index == -1:
