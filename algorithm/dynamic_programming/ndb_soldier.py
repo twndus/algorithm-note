@@ -6,7 +6,6 @@ soldiers = list(map(int, input().split()))[::-1]
 d = [1]*n
 
 for i in range(1, n):
-    options = []
     for j in range(i):
         if soldiers[i] > soldiers[j]:
             d[i] = max(d[i], d[j]+1)
