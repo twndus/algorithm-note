@@ -1,4 +1,5 @@
 # 백준: 2xn 타일링 https://www.acmicpc.net/problem/11726
+
 from math import factorial
 
 n = int(input())

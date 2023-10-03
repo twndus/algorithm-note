@@ -1,14 +1,13 @@
-# 이코테: 병사 배치하기
-## 풀이 전략 - LIS 알고리즘
-
+# input
 n = int(input())
-soldiers = list(map(int, input().split()))[::-1]
+soldiers = list(map(int,input().split()))
+
 d = [1]*n
 
 for i in range(1, n):
+    # i 이전까지의 위치를 모두 확인
     for j in range(i):
-        if soldiers[i] > soldiers[j]:
+        if soldiers[j] > soldiers[i]: # 조건을 만족하면
             d[i] = max(d[i], d[j]+1)
-    print(soldiers, d)
 
-print(n-d[-1])
+print(n-max(d))
