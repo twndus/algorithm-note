@@ -2,53 +2,23 @@
 a = input()
 b = input()
 
-dp_len = [[0 for _ in range(len(b)+1)] for _ in range(len(a)+1)]
-dp_track = [[0 for _ in range(len(b)+1)] for _ in range(len(a)+1)] # same:1, x: 2, y: 3
+n,m = len(a), len(b)
 
-# alignment
-for ai in range(1,len(a)+1):
-    for bi in range(1, len(b)+1):
-        if a[ai-1] == b[bi-1]:
-            dp_len[ai][bi] = dp_len[ai-1][bi-1] + 1
-            dp_track[ai][bi] = 1
-        elif dp_len[ai-1][bi] < dp_len[ai][bi-1]:
-            dp_len[ai][bi] = dp_len[ai][bi-1]
-            dp_track[ai][bi] = 2
+# dp table 생성 및 초기화
+dp = [[0 for i in range(m+1)] for j in range(n+1)]
+dp[0] = [i for i in range(m+1)]
+for j in range(n+1):
+    dp[j][0] = j
+
+# dp table 확인
+for row in dp:
+    print(dp)
+
+for i in range(1,n+1):
+    for j in range(1, m+1):
+        if a[i-1] == b[j-1]:
+            dp[i][j] = dp[i-1][j-1]
         else:
-            dp_len[ai][bi] = dp_len[ai-1][bi]
-            dp_track[ai][bi] = 3
+            dp[i][j] = 1 + min(dp[i-1][j-1], dp[i][j-1], dp[i-1][j])
 
-# check lcs
-ai,bi = len(a), len(b)
-result = 0#'' #0
-before = 0
-
-while ai > 0 and bi > 0:
-#    if dp_len[ai][bi] == 0:
-#        result += bi
-#        break
-    print(ai, bi, result)
-    if dp_track[ai][bi] == 1:
-        #result += a[ai-1]
-        before, dp_track[ai][bi] = 1, -1
-        #dp_track[ai][bi] = -1
-        ai, bi = ai-1, bi-1
-    elif dp_track[ai][bi] == 2:
-        if before != 3: result += 1
-        before = 2
-        ai, bi = ai, bi-1
-    else:
-        if before != 2: result += 1
-        before = 3
-        ai, bi = ai-1, bi
-#else:
-#    if ai <= 0:
-#        result += bi
-#    else:
-#        result += ai
-
-for row in dp_track:
-    print(row)
-
-print(result)#[::-1])
-
+print(dp[-1][-1])
